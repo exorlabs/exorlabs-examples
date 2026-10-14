@@ -1,0 +1,22 @@
+[Unit]
+Description=Exor Labs read-only Proxmox stats collector
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=exorstats
+Group=exorstats
+WorkingDirectory=/opt/exor-rackstats
+Environment=PYTHONPATH=/opt/exor-rackstats/server
+Environment=PYTHONDONTWRITEBYTECODE=1
+EnvironmentFile=/etc/exor-rackstats.env
+ExecStart=/usr/bin/python3 -m rackstats_agent
+Restart=on-failure
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target

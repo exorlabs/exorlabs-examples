@@ -1,0 +1,85 @@
+name: Working examples
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  diagram-codec:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: exor-rea-drawio
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: node tools/fetch_upstream.mjs
+      - run: python3 scripts/compare_with_app.py
+      - run: python3 drawio_unpack.py upstream/examples/C4.drawio --out artifacts/C4-uncompressed.drawio
+      - run: python3 -m unittest discover -s tests -v
+  rea-analysis:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: exor-rea-drawio
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: npm install --global rea-agents@6.4.0
+      - run: node tools/fetch_upstream.mjs
+      - run: python3 scripts/run_rea.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: drawio-rea-analysis
+          path: exor-rea-drawio/artifacts/rea-analysis.json
+          if-no-files-found: warn
+  collectors-and-decoder:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: exor-rackstats
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python3 -m unittest discover -s tests -v
+      - name: Build the firmware's JSON decoder natively
+        run: |
+          git clone --depth 1 --branch v7.3.1 https://github.com/bblanchon/ArduinoJson.git /tmp/ArduinoJson
+          g++ -std=c++11 -Wall -Wextra -Werror -I /tmp/ArduinoJson/src -I firmware tools/native_decode.cpp -o /tmp/exor-native-decode
+          python3 tools/check_firmware_decoder.py /tmp/exor-native-decode
+  firmware:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    defaults:
+      run:
+        working-directory: exor-rackstats
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: arduino/setup-arduino-cli@v2
+      - name: Prepare the reviewed vendor port
+        run: |
+          curl --fail --location --retry 2 https://files.waveshare.net/wiki/ESP32-S3-LCD-3.16/ESP32-S3-LCD-3.16-Demo.zip -o /tmp/waveshare-demo.zip
+          python3 tools/prepare_firmware.py /tmp/waveshare-demo.zip
+      - name: Install pinned core and JSON library
+        run: |
+          arduino-cli core update-index --additional-urls https://espressif.github.io/arduino-esp32/package_esp32_index.json
+          arduino-cli core install esp32:esp32@3.1.0 --additional-urls https://espressif.github.io/arduino-esp32/package_esp32_index.json
+          arduino-cli lib install ArduinoJson@7.3.1
+      - name: Compile the complete template firmware
+        run: |
+          arduino-cli compile --fqbn esp32:esp32:esp32s3:PSRAM=opi,FlashSize=16M,PartitionScheme=app3M_fat9M_16MB,USBMode=hwcdc,CDCOnBoot=cdc --libraries build/libraries build/ExorRackStats

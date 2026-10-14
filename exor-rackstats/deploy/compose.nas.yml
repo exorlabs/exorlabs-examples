@@ -1,0 +1,20 @@
+services:
+  nas-stats:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    env_file: ../.env.nas
+    user: "${RACKSTATS_UID:-1000}:${RACKSTATS_GID:-1000}"
+    network_mode: host
+    environment:
+      RACKSTATS_TLS_CERT: /secrets/nas.crt
+      RACKSTATS_TLS_KEY: /secrets/nas.key
+    volumes:
+      - /proc:/host/proc:ro
+      - ${NAS_STORAGE_PROBE}:/monitored/storage:ro
+      - ../secrets:/secrets:ro
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    restart: unless-stopped
+    mem_limit: 128m

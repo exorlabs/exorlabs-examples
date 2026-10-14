@@ -1,0 +1,16 @@
+#pragma once
+// Copy to config.h. This real file is ignored by git.
+static const char *WIFI_SSID = "REPLACE_WITH_WIFI_NAME";
+static const char *WIFI_PASSWORD = "REPLACE_WITH_WIFI_PASSWORD";
+static const char *NAS_STATS_URL = "https://10.0.0.40:4300/api/v1/stats";
+static const char *PROXMOX_STATS_URL = "https://10.0.0.50:4310/api/v1/stats";
+static const char *NAS_STATS_TOKEN = "REPLACE_WITH_NAS_STATS_TOKEN";
+static const char *PROXMOX_STATS_TOKEN = "REPLACE_WITH_PROXMOX_STATS_TOKEN";
+// Paste the collector CA certificate produced by tools/make_tls.py.
+// HTTPS requests fail safely if this is empty. No setInsecure() fallback.
+static const char *STATS_CA_PEM = R"CERT(
+)CERT";
+// Set true only when intentionally using an HTTP demo on a trusted local LAN.
+static const bool ALLOW_LAN_HTTP = false;
+static const uint32_t POLL_MS = 5000;
+static const char *NTP_SERVER = "pool.ntp.org"; // A local NTP server also works.

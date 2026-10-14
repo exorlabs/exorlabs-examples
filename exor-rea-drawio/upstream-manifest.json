@@ -1,0 +1,61 @@
+{
+  "application_version": "32.4.1",
+  "files": [
+    {
+      "repository": "jgraph/drawio",
+      "revision": "9034053fba80a435e27d68d374bc564b83917ae9",
+      "path": "src/main/webapp/js/app.min.js",
+      "destination": "drawio/app.min.js",
+      "sha256": "6b459480290f96a8c345ee636523a86e6de6ef5ffb62532cfc04a5b4a896b7e0"
+    },
+    {
+      "repository": "jgraph/drawio",
+      "revision": "9034053fba80a435e27d68d374bc564b83917ae9",
+      "path": "src/main/webapp/js/deflate/pako.min.js",
+      "destination": "drawio/pako.min.js",
+      "sha256": "7420457ec218cafec3515b75adf7dcbc8c3e46b020fa81c3c7c9f0a89973e370"
+    },
+    {
+      "repository": "jgraph/drawio",
+      "revision": "9034053fba80a435e27d68d374bc564b83917ae9",
+      "path": "src/main/webapp/js/diagramly/Editor.js",
+      "destination": "drawio/Editor.js",
+      "sha256": "89804061ee09d5ec5196d75c47d4f47c4a8f7b7d6b9f25b1f84066485967b147"
+    },
+    {
+      "repository": "jgraph/drawio",
+      "revision": "9034053fba80a435e27d68d374bc564b83917ae9",
+      "path": "LICENSE",
+      "destination": "drawio/LICENSE",
+      "sha256": "43070e2d4e532684de521b885f385d0841030efa2b1a20bafb76133a5e1379c1"
+    },
+    {
+      "repository": "jgraph/drawio-diagrams",
+      "revision": "60b4bc39c6fcc0df88d5ad3f86aa98bd6a3fa0c7",
+      "path": "blog/aws-robot.drawio",
+      "destination": "examples/aws-robot.drawio",
+      "sha256": "1fb8f60f0605c52a73b7d43d11933fea94b658425d2692c667a54f169c7cd81e"
+    },
+    {
+      "repository": "jgraph/drawio-diagrams",
+      "revision": "60b4bc39c6fcc0df88d5ad3f86aa98bd6a3fa0c7",
+      "path": "blog/C4.drawio",
+      "destination": "examples/C4.drawio",
+      "sha256": "daa6e242e3684351e18ebd083a8fb80f2bb48fbf84f77c2e8a4776ff080e2975"
+    },
+    {
+      "repository": "jgraph/drawio-diagrams",
+      "revision": "60b4bc39c6fcc0df88d5ad3f86aa98bd6a3fa0c7",
+      "path": "blog/CSVimport-examples.drawio",
+      "destination": "examples/CSVimport-examples.drawio",
+      "sha256": "694adf5e785efc5fede6727d5a558374e0343628495dc494e3214a02ef2ba7ba"
+    },
+    {
+      "repository": "jgraph/drawio",
+      "revision": "9034053fba80a435e27d68d374bc564b83917ae9",
+      "path": "src/main/webapp/js/grapheditor/Graph.js",
+      "destination": "drawio/Graph.js",
+      "sha256": "a08eeeb494621e604e45e617e63f131142c6af3b803701dbecd6a67c8bc78226"
+    }
+  ]
+}
