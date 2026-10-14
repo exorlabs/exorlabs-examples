@@ -45,6 +45,8 @@ The wrapper analyzes the actual downloaded artifacts in `upstream/drawio`; it sa
 
 REA can organize and trace the application evidence. The coding agent still interprets it and writes the independent implementation. The comparison command checks that interpretation against real application functions.
 
+The REA command completed successfully on GitHub's Ubuntu runner on October 14, 2026. Its [actual analysis report](https://github.com/exorlabs/exorlabs-examples/actions/runs/38656611840/artifacts/11937181785) is available as a workflow artifact. This is a static analysis of the four downloaded JavaScript files; browser rendering and interactive feature tracing are separate checks.
+
 ## What the checks establish
 
 `scripts/compare_with_app.py` extracts four unchanged codec function definitions from the hash-verified application bundle and loads its real bundled pako dependency. The native harness does not reimplement those compression functions. It compares:

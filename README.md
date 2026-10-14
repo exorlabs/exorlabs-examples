@@ -59,10 +59,10 @@ The first-run demo data is explicitly simulated. Use the deployment guide for re
 
 ## GitHub and publishing
 
-The intended public repository is [exorlabs/exorlabs-examples](https://github.com/exorlabs/exorlabs-examples). [GITHUB-SETUP.md](GITHUB-SETUP.md) covers the initial upload and later updates. Four workflow jobs check the real application codec, REA analysis, collectors/decoder and firmware compilation. The REA job retains the actual analysis/error JSON as a downloadable artifact; it stays failed if the real CLI operation fails.
+The public repository is [exorlabs/exorlabs-examples](https://github.com/exorlabs/exorlabs-examples). [GITHUB-SETUP.md](GITHUB-SETUP.md) covers the initial upload and later updates. Four workflow jobs check the real application codec, REA analysis, collectors/decoder and firmware compilation. The REA job retains the actual analysis/error JSON as a downloadable artifact; it stays failed if the real CLI operation fails. See [GitHub Actions](https://github.com/exorlabs/exorlabs-examples/actions) for the current results.
 
 Each project's `docs/BLOG.md` is a short article with full-code links to its folder in this repository.
 
-The first article follows the clues in the saved diagram; it does not narrate a REA success that has not happened. See [VALIDATION.md](VALIDATION.md) for completed checks and the remaining REA, browser and hardware/private-host deployment checks.
+The first article follows the clues in the saved diagram. REA's static analysis has also completed on GitHub's Ubuntu runner; its report is available from the workflow artifact. See [VALIDATION.md](VALIDATION.md) for the evidence, the earlier authoring-runtime limitation and the remaining browser and hardware/private-host deployment checks.
 
 Downloaded upstream files, generated outputs, real `.env` files, `firmware/config.h`, certificates/keys and build products are ignored. Original companion code is MIT licensed. draw.io and the other separately obtained dependencies retain their upstream licenses.

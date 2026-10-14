@@ -16,12 +16,15 @@ The target is draw.io's published 32.4.1 bundle from official commit `9034053fba
 | Local decoder/file suite | Passed: seven tests covering metadata, multiple pages, plain XML, Unicode, invalid data and retained file-level children |
 | Node/Python syntax checks | Passed |
 | Real REA 6.4.0 analysis of the draw.io artifacts | Attempted; stopped during source analysis because the authoring runtime cannot satisfy its procps process-ownership preflight |
+| REA 6.4.0 on GitHub-hosted Ubuntu 24.04 | Passed on October 14, 2026: analyzed four application JavaScript files, reconstructed and validated the static graphs, and saved the analysis artifact |
 
 The application comparison extracts four unchanged codec function definitions from the digest-verified bundle and uses the application's real pako dependency. It does not substitute a homemade codec as the oracle. The decoder call uses `Graph.decompress(payload, false, true)` to obtain decoded text before the UI's control-character cleanup. Inputs are valid graph-model XML. This is an application-component test, not a full browser run.
 
 The cloud browser timed out opening draw.io. No observed editor rendering, successful UI save/import, screenshot or full browser round trip is claimed. The README describes the first visual check readers can run with their own files in the actual editor. XML may be reformatted during output; page IDs, names, model data and other file metadata are retained.
 
 REA emitted `capability_unavailable` / `unsupported_provider`: `ps -axo pid=,ppid=,pgid=,uid=,stat=,command=` failed with `fatal library error, lookup self`. Its partial observation is not a completed feature trace. No REA guard was modified. The unmodified CLI operation and a strict Ubuntu CI job are included; the real command must succeed on a normal host before its results are used as a completed REA case study.
+
+That earlier runtime limitation did not occur on the GitHub-hosted runner. The first remote run completed the unmodified CLI operation and uploaded [drawio-rea-analysis](https://github.com/exorlabs/exorlabs-examples/actions/runs/38656611840/artifacts/11937181785). This establishes a successful static application analysis. It does not establish an interactive browser session or a separately requested feature trace. Readers can download the report from the workflow run or reproduce it with the documented command.
 
 The blog follows findings checked against the actual bundle and examples. It does not invent a first-person browser session, a successful REA trace or a secret/undocumented format. draw.io publishes its format documentation too.
 
@@ -59,4 +62,4 @@ No physical ESP32 upload, panel/PSRAM reliability run, private NAS Docker deploy
 
 The public package contains source, tests, deployment files, templates, an MIT license, short blog bodies and four CI jobs. Real credentials, certificate private keys, generated builds, vendor downloads and authoring QA files are excluded. The final ZIP is checked by extraction, fresh upstream downloads and the packaged application-codec comparison.
 
-The GitHub workflow has not been executed on a remote repository yet. Its results become available after the first push. The companion article links are set to the intended public repository, `https://github.com/exorlabs/exorlabs-examples`.
+The source was published to the public `exorlabs/exorlabs-examples` repository on October 14, 2026. All 47 published file blobs and their paths matched the prepared source tree exactly. The first remote workflow run is [Working examples](https://github.com/exorlabs/exorlabs-examples/actions/runs/38656611840); use its job results and logs to distinguish remote CI results from the earlier authoring checks above. The companion article links point to the actual public project folders.
